@@ -48,9 +48,11 @@ const SearchByIngredient = (props) => {
                                                                                 {drink.strCategory}
                                                                       </div>
                                                                       <div className="flex justify-center">
-                                                                                <div>
-                                                                                          {drink.strDrinkThumb ? <img className="rounded-lg" src={drink.strDrinkThumb} /> : null}
-                                                                                </div>
+                                                                                <Link to={`/searchbyname/${drink.strDrink}`} className="text-4xl m-1">
+                                                                                          <div>
+                                                                                                    {drink.strDrinkThumb ? <img className="rounded-lg" src={drink.strDrinkThumb} /> : null}
+                                                                                          </div>
+                                                                                </Link>
                                                                       </div>
                                                                       <div>
                                                                                 <div className="text-4xl m-1">

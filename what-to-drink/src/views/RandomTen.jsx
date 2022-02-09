@@ -44,7 +44,9 @@ const RandomTen = (props) => {
                                                             </div>
                                                             <div className="flex justify-center mx-auto">
                                                                       <div>
-                                                                                <img className="rounded-lg" src={drink.strDrinkThumb} />
+                                                                                <Link to={`/searchbyname/${drink.strDrink}`} className="text-2xl m-1">
+                                                                                          <img className="rounded-lg" src={drink.strDrinkThumb} />
+                                                                                </Link>
                                                                       </div>
                                                             </div>
                                                   </div>

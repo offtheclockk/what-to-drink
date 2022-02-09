@@ -10,7 +10,7 @@ const Navbar = () => {
           }, []);
 
           return (
-                    <div class="container navbar mb-2 shadow-lg bg-primary text-neutral-content mx-auto">
+                    <div class="container navbar mb-2 shadow-lg bg-primary text-neutral-content mx-auto rounded-box">
                               <div class="flex-none px-2 mx-2">
                                         <span class="text-lg font-bold text-neutral-content">
                                                   WhatToDrink
