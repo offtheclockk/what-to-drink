@@ -1,117 +1,76 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { themeChange } from 'theme-change';
-import { ReactComponent as DrinkSVG } from "../components/undraw_coding_re_iv62.svg"
+import { ReactComponent as DrinkSVG } from "../components/undraw_coding_re_iv62.svg";
 
 const Main = (props) => {
-          const [drinks, setDrinks] = useState([]);
-          const [randomDrink, setRandomDrink] = useState([]);
-          const [loaded, setLoaded] = useState(false);
-          const [errors, setErrors] = useState("");
-          const [drinkLoaded, setDrinkLoaded] = useState(false);
+  const [drinks, setDrinks] = useState([]);
+  const [randomDrink, setRandomDrink] = useState([]);
+  const [loaded, setLoaded] = useState(false);
+  const [errors, setErrors] = useState("");
+  const [drinkLoaded, setDrinkLoaded] = useState(false);
 
-          useEffect(() => {
-                    themeChange(false)
-                    axios.get('http://localhost:8000/api/drinks')
-                              .then(res => {
-                                        setDrinks(res.data);
-                                        setLoaded(true);
-                              })
-                              .catch(err =>
-                                        console.error(err));
-          }, [loaded]);
+  useEffect(() => {
+    themeChange(false)
+    axios.get('http://localhost:8000/api/drinks')
+      .then(res => {
+        setDrinks(res.data);
+        setLoaded(true);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }, [loaded]);
 
-          const showRandomDrink = (() => {
-                    setDrinkLoaded(false)
-                    axios.get('https://www.thecocktaildb.com/api/json/v1/1/random.php')
-                              .then(response => {
-                                        console.log(response.data.drinks[0])
-                                        setRandomDrink(response.data.drinks[0])
-                                        setDrinkLoaded(true)
-                              })
-          });
+  const showRandomDrink = (() => {
+    setDrinkLoaded(false)
+    axios.get('https://www.thecocktaildb.com/api/json/v1/1/random.php')
+      .then(response => {
+        console.log(response.data.drinks[0])
+        setRandomDrink(response.data.drinks[0])
+        setDrinkLoaded(true)
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  });
 
-          return (
-                    <div className="container mx-auto flex-col items-stretch bg-neutral text-neutral-content font-serif">
-                              <button className="btn btn-primary btn-liquid m-1 justify-center h-24 w-100" onClick={(event) => { showRandomDrink() }}>Generate Drink</button>
-                              {drinkLoaded ? (
-                                        <>
-                                                  <div className="text-4xl m-1">
-                                                            {randomDrink.strDrink}
-                                                  </div>
-                                                  <div>
-                                                            {randomDrink.strCategory}
-                                                  </div>
-                                                  <div>
-                                                            <div className="flex justify-center">
-                                                                      <img className="rounded-lg img" src={randomDrink.strDrinkThumb} />
-                                                            </div>
-                                                  </div>
-                                                  <div>
-                                                            <div className="text-4xl m-1">
-                                                                      Ingredients:
-                                                            </div>
-                                                            <div>
-                                                                      {randomDrink.strMeasure1} {randomDrink.strIngredient1}
-                                                            </div>
-                                                            <div>
-                                                                      {randomDrink.strMeasure2}  {randomDrink.strIngredient2}
-                                                            </div>
-                                                            <div>
-                                                                      {randomDrink.strMeasure3} {randomDrink.strIngredient3}
-                                                            </div>
-                                                            <div>
-                                                                      {randomDrink.strMeasure4} {randomDrink.strIngredient4}
-                                                            </div>
-                                                            <div>
-                                                                      {randomDrink.strMeasure5} {randomDrink.strIngredient5}
-                                                            </div>
-                                                            <div>
-                                                                      {randomDrink.strMeasure6} {randomDrink.strIngredient6}
-                                                            </div>
-                                                            <div>
-                                                                      {randomDrink.strMeasure7} {randomDrink.strIngredient7}
-                                                            </div>
-                                                            <div>
-                                                                      {randomDrink.strMeasure8} {randomDrink.strIngredient8}
-                                                            </div>
-                                                            <div>
-                                                                      {randomDrink.strMeasure9} {randomDrink.strIngredient9}
-                                                            </div>
-                                                            <div>
-                                                                      {randomDrink.strMeasure10} {randomDrink.strIngredient10}
-                                                            </div>
-                                                            <div>
-                                                                      {randomDrink.strMeasure11} {randomDrink.strIngredient11}
-                                                            </div>
-                                                            <div>
-                                                                      {randomDrink.strMeasure12} {randomDrink.strIngredient12}
-                                                            </div>
-                                                            <div>
-                                                                      {randomDrink.strMeasure13} {randomDrink.strIngredient13}
-                                                            </div>
-                                                            <div>
-                                                                      {randomDrink.strMeasure14} {randomDrink.strIngredient14}
-                                                            </div>
-                                                            <div>
-                                                                      {randomDrink.strMeasure15} {randomDrink.strIngredient15}
-                                                            </div>
-                                                  </div>
-                                                  <div>
-                                                            <div className="text-4xl m-1">
-                                                                      Instructions:
-                                                            </div>
-                                                            <div>
-                                                                      {randomDrink.strInstructions}
-                                                            </div>
-                                                  </div>
-                                        </>
-                              ) : (
-                                        <div className="flex justify-center col-span-5">
-                                                  <DrinkSVG className="animate-pulse mt-60" />
-                                        </div>
-                              )}
-                    </div>
-          );
+  return (
+    <div className="container mx-auto flex-col items-center bg-gray-100 text-gray-800 font-serif">
+      <div className="flex flex-col items-center space-y-4 mt-10">
+        <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-8 rounded-lg shadow-lg" onClick={(event) => { showRandomDrink() }}>
+          Generate Drink
+        </button>
+        {drinkLoaded ? (
+          <div className="flex flex-col items-center space-y-4">
+            <h1 className="text-4xl font-bold text-blue-500">{randomDrink.strDrink}</h1>
+            <p className="text-lg font-bold">{randomDrink.strCategory}</p>
+            <div className="flex justify-center">
+              <img className="w-72 h-72 rounded-lg shadow-lg" src={randomDrink.strDrinkThumb} alt={randomDrink.strDrink} />
+            </div>
+            <div className="text-lg">
+              <h2 className="text-xl font-bold text-blue-500">Ingredients:</h2>
+              <ul className="list-disc ml-8">
+                {Object.entries(randomDrink)
+                  .filter(([key, value]) => key.startsWith('strIngredient') && value)
+                  .map(([key, value]) => (
+                    <li key={key}>{randomDrink['strMeasure' + key.slice(-1)]} {value}</li>
+                  ))}
+              </ul>
+            </div>
+            <div className="text-lg">
+              <h2 className="text-xl font-bold text-blue-500">Instructions:</h2>
+              <p>{randomDrink.strInstructions}</p>
+            </div>
+          </div>
+        ) : (
+          <div className="flex justify-center">
+            <DrinkSVG className="animate-pulse w-24 h-24 mt-16" />
+          </div>
+        )}
+      </div>
+    </div>
+  );
 }
+
 export default Main;
